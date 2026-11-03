@@ -74,7 +74,10 @@ assumption explicitly under `Unanswered questions`.
    before analyzing it. Prefer sanitized extracts (resource addresses,
    attribute names, redacted values); never request raw state files or
    full plan dumps when an extract suffices. If the material as supplied
-   embeds credentials, ask for a redacted form first.
+   embeds credentials, ask for a redacted form first. If sensitive values
+   have already been pasted, treat them as exposed: do not repeat them,
+   name the credential type and location, flag rotation as a finding, and
+   proceed with the review from sanitized extracts rather than stalling.
 3. **Identify the plan format.** Legacy text plan (`Plan: X to add, Y to
    change, Z to destroy`), JSON plan (has `terraform_version`,
    `planned_changes` / resource deltas), or a described saved plan file.
@@ -88,7 +91,9 @@ assumption explicitly under `Unanswered questions`.
    module output).
 5. **Triage risks, highest first.** For each, record: severity
    (blocking / high / medium / low / info), evidence (exact plan text or
-   JSON pointer), impact, and what to confirm.
+   JSON pointer — when it contains sensitive values, cite the line number
+   or pointer and quote the redacted form, never the full unredacted
+   line), impact, and what to confirm.
    - Destroys of persistent stores, stateful services, DNS/CDN, IAM, or
      anything with backup implications → blocking or high.
    - Replaces of stateful or hard-to-recreate resources; `requires
@@ -207,7 +212,8 @@ Deliver, in this order:
       line (or the discrepancy is a filed finding).
 - [ ] Every finding cites re-checkable evidence (plan line, JSON pointer,
       or exact quote) and names the affected resource address where the
-      plan provides one.
+      plan provides one; quotes containing sensitive material are
+      redacted with the pointer kept.
 - [ ] All secrets/PII that appeared in the plan are flagged as exposed and
       absent (redacted) from the review output.
 - [ ] The output states evidence sufficiency for the verdict (sufficient /
