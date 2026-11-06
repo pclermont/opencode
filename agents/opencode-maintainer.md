@@ -111,8 +111,10 @@ primary session.
 
 ## Known environment facts (re-verify before relying on them)
 
-Verified on this machine when this definition was written: OpenCode
-1.19.5 at `/usr/local/bin/opencode`; global config at
+Do not assume a specific OpenCode install path or version unless
+re-verified in the active environment. When this definition was written,
+the local environment used OpenCode 1.19.5 and the executable was
+available at `/usr/local/bin/opencode`; global config at
 `~/.config/opencode/opencode.json`; global agents in
 `~/.config/opencode/agents/`; `opencode agent list` prints each agent
 with `(primary|subagent|all)` plus its resolved permission entries and
