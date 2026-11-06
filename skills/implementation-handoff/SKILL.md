@@ -1,6 +1,6 @@
 ---
 name: implementation-handoff
-description: 'Drafts a self-contained implementation brief from an agreed spec, investigation, or plan. Use when the user says: "hand this off to another agent", "write an implementation brief", "summarize the plan for a developer", "prepare a handoff", "spec-to-implementation brief". Covers objective, requirements and acceptance criteria, verified files and interfaces, constraints, evidence-backed findings, assumptions and decisions, in/out of scope, suggested verification, and changes to preserve. Separates approved decisions from recommendations; keeps requirement identifiers; hypotheses never become requirements; no invented paths, APIs, or stakeholder approval. Read-only: conversation output only; no file writes, agent calls, or implementation; saving to a named path needs explicit approval. Not for authoring the spec or plan (requirements-analyst/planning), repo orientation (project-orientation), running verification (change-verification), bug reports (bug-report-draft), opencode config edits (customize-opencode).'
+description: 'Drafts a self-contained implementation brief from an agreed spec, investigation, or plan. Use when the user says: "hand this off to another agent", "write an implementation brief", "summarize the plan for a developer", "prepare a handoff", "spec-to-implementation brief". Covers objective, requirements and acceptance criteria, verified files and interfaces, constraints, evidence-backed findings, assumptions and decisions, in/out of scope, suggested verification, and changes to preserve. Separates approved decisions from recommendations; keeps requirement identifiers; hypotheses never become requirements; no invented paths, APIs, or stakeholder approval. Read-only: conversation output only; no file writes, agent calls, or implementation; saving to a named path needs explicit approval. Not for authoring the spec or plan (requirements-analyst agent or another planning workflow), repo orientation (project-orientation), running verification (change-verification), bug reports (bug-report-draft), opencode config edits (customize-opencode).'
 ---
 
 # Implementation handoff
@@ -19,7 +19,7 @@ asks to package it for someone else: "hand this off to another agent",
 "prepare a handoff", "spec-to-implementation brief".
 
 Do NOT use for: producing the specification or plan itself
-(requirements-analyst or a planning task owns that), orienting in an
+(the requirements-analyst agent or a planning task owns that), orienting in an
 unfamiliar repository (project-orientation), running or designing the
 execution of checks (change-verification owns running them), writing a bug
 report (bug-report-draft), or editing opencode configuration
