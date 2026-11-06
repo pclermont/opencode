@@ -13,7 +13,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Strata (local)",
       "options": {
-        "baseURL": "http://127.0.0.1:8080/v1",
+        "baseURL": "{env:STRATA_BASE_URL}",
         "apiKey": "{env:STRATA_API_KEY}"
       },
       "models": {
