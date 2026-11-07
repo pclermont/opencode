@@ -9,6 +9,16 @@ permission:
   websearch: deny
   bash:
     "*": ask
+    "ls": allow
+    "ls *": allow
+    "stat *": allow
+    "wc *": allow
+    "grep *": allow
+    "rg *": allow
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git show*": allow
   external_directory:
     "*": ask
     "~/.config/opencode/skills/**": allow
@@ -156,7 +166,9 @@ authorizes a testing agent or maintenance action.
 
 - `edit: deny` prevents this agent from editing files. Do not describe the
   agent as fully sandboxed: approved shell commands can still change state.
-- `bash: {"*": ask}` means all shell commands require user approval.
+- `bash` pre-approves read-only inspection commands (`ls`, `stat`, `wc`,
+  `grep`, `rg`, and `git status`/`diff`/`log`/`show`); every other shell
+  command requires user approval under `"*": ask`.
 - `task: deny`, `webfetch: deny`, and `websearch: deny` keep this agent
   from invoking subagents and contacting external services.
 - `external_directory` is narrow: only global OpenCode agent/skill paths,
