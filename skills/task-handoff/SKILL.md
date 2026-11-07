@@ -41,6 +41,8 @@ requires an explicit user request for a named path.
 - Briefing someone from an agreed spec or plan for work not yet started:
   implementation-handoff owns spec-to-implementation briefs.
 - Running or judging checks on a change already made: change-verification.
+  When "ready for review" means verify the change first, that skill owns
+  it; this skill owns transferring current work for another owner.
 - Capturing evidence during an evaluation or test run: evaluation-evidence.
 - File-worthy bug reports: bug-report-draft; Jira tickets:
   jira-issue-drafting, jira-safe-update.

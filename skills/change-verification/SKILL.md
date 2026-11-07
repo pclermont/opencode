@@ -1,6 +1,6 @@
 ---
 name: change-verification
-description: "Chooses and runs proportionate verification for a change already made and reports honestly what passed and what did not. Use when the user says: verify this change, run the tests, did this break anything, confirm the fix works, check before commit, is this safe to commit, ready for review, does this meet the acceptance criteria, or after edits, or after updating tests, dependencies, or configuration. Maps changed behavior and plausible regressions to focused tests and static checks, screens commands for side effects (auto-fix like lint --fix, generated files, services, secrets, costs), gets approval before risky commands, runs focused checks first, separates change-related from pre-existing or environmental failures, inspects the final diff, preserves user changes, and never weakens checks to force a pass. Not for repo orientation before changes (project-orientation), opencode config content (customize-opencode), and broken opencode installs (opencode-maintainer)."
+description: "Chooses and runs proportionate verification for a change already made and reports honestly what passed and what did not. Use when the user says: verify this change, run the tests, did this break anything, confirm the fix works, check before commit, is this safe to commit, ready for review, does this meet the acceptance criteria, or after edits, or after updating tests, dependencies, or configuration. Maps changed behavior and plausible regressions to focused tests and static checks, screens commands for side effects (auto-fix like lint --fix, generated files, services, secrets, costs), gets approval before risky commands, runs focused checks first, separates change-related from pre-existing or environmental failures, inspects the final diff, preserves user changes, and never weakens checks to force a pass. Not for repo orientation before changes (project-orientation), opencode config content (customize-opencode), broken opencode installs (opencode-maintainer), or transferring in-flight work between agents, sessions, or roles (task-handoff)."
 ---
 
 # Change Verification
@@ -39,6 +39,12 @@ including read-only checks.
   change back to this skill.
 - The task is implementing or fixing the change: this skill starts after a
   change is made; fixing failures it finds is a separate approved task.
+- The request is to move in-flight work to another agent, session, or role
+  rather than to confirm the effects of a change: task-handoff owns work
+  transfers and routing. Disambiguate the shared trigger: "is this ready
+  for review" meaning run the checks first belongs here; "ready for review
+  or testing" meaning package current state for the next owner belongs to
+  task-handoff.
 - The failure should only be written up as a report: bug-report-draft owns
   report drafting; this skill owns running checks.
 - opencode itself will not start or config will not load:
