@@ -99,8 +99,10 @@ Before any [LIVE] operation:
 ## Procedure
 
 1. Classify the requested operation: comment, create from an approved
-   payload, field update, assignment, status transition, or other
-   supported write. If unsupported, stop with the reason.
+   payload, field update, assignment, status transition, link or
+   relation operation, or another named write clearly supported by the
+   discovered integration. If the operation is not one of these, stop
+   with the reason.
 2. Establish context: site, deployment type, integration, and project
    or issue scope. Do not print or request credential values. If auth
    is unclear or failing, stop and route diagnosis to

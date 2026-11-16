@@ -6,7 +6,9 @@ description: >-
   statuses, decisions and approvals, one smallest next action. Use when the
   user says: "hand this off", "session ending with unfinished work", "ready
   for review or testing", "blocked, another role must investigate", or when
-  work moves between agents or roles. Proportionate: a small task gets a few
+  work moves between agents or roles. For "ready for review or testing", use
+  this for unfinished work and change-verification for already-made changes.
+  Proportionate: a small task gets a few
   lines, not a report. A handoff is never authorization: no edits, staging,
   commits, pushes, service contact, or agent invocation; secrets and sensitive
   logs excluded; earlier claims stay unverified unless re-checked this

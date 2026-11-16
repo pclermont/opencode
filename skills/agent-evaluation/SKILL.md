@@ -1,6 +1,6 @@
 ---
 name: agent-evaluation
-description: "Evaluates an OpenCode agent with controlled cases and observable evidence before recommending definition changes. Use for: evaluate this agent, test agent behavior, agent behaves oddly, before changing an agent. Pre-registers expected and unacceptable behavior, runs normal, ambiguous, approval-boundary, and insufficient-evidence cases as approval-gated fixtures in fresh sessions; records outputs and tool actions, separates agent judgment from permission enforcement, marks blocked/unrun honestly, repeats surprises, compares revisions on identical cases. Scores task accuracy, evidence quality, scope control, approval behavior, output usefulness; safety failures reported separately, never averaged. Never edits the agent, broadens permissions, uses production systems, or runs destructive boundary tests. Not for verifying code changes (change-verification), skill package testing (skill-tester/skill-reviewer agents), agent definition edits (agent-builder), or opencode configuration (customize-opencode)."
+description: "Evaluates an OpenCode agent with controlled cases and observable evidence before recommending definition changes. Use for: evaluate this agent, test agent behavior, agent behaves oddly, before changing an agent. Pre-registers expected and unacceptable behavior, runs normal, ambiguous, approval-boundary, and insufficient-evidence cases as approval-gated fixtures in fresh sessions; records outputs and tool actions, separates agent judgment from permission enforcement, marks blocked/inconclusive/not-run, repeats surprises, compares revisions on identical cases. Scores task accuracy, evidence quality, scope control, approval behavior, output usefulness; safety failures reported separately, never averaged. Never edits the agent, broadens permissions, uses production systems, or runs destructive boundary tests. Not for verifying code changes (change-verification), skill package testing (skill-tester/skill-reviewer agents), agent definition edits (agent-builder), or opencode configuration (customize-opencode)."
 ---
 
 # Agent Evaluation
@@ -43,7 +43,7 @@ still gate every step.
   /tmp/opencode/) in separate fresh sessions where practical.
 - Boundary cases are safe probes only: ask for an out-of-scope or
   approval-crossing action inside a throwaway fixture, never a genuinely
-  destructive or irreversible effect; otherwise redesign or mark NOT TESTED.
+   destructive or irreversible effect; otherwise redesign or mark not-run.
 - Write expected and unacceptable behavior down before running any case;
   never decide pass/fail after seeing the output.
 - Obtain explicit user approval before creating fixtures, invoking agents,
@@ -74,9 +74,12 @@ still gate every step.
    sent, the output produced, which tools, files, or commands were
    touched, and whether the agent asked for approval when the case
    expected it.
-6. Label every case honestly: PASS, FAIL, BLOCKED (could not run, with
-   reason), or NOT TESTED (not run). Never report an unrun case as a
-   pass; never soften a safety failure to average it away.
+6. Label every case honestly with the five shared evaluation-evidence
+   labels: pass, fail, blocked (could not run, with reason), inconclusive
+   (ran or partially ran, but evidence is incomplete, ambiguous, or
+   unreferencable), or not-run (never started). Never report a case that
+   was not run, or whose evidence is missing or ambiguous, as a pass;
+   never soften a safety failure to average it away.
 7. Repeat surprises: rerun a surprising result under the same
    conditions before drawing any conclusion, and report divergence if
    the repeat behaves differently.
@@ -88,7 +91,9 @@ still gate every step.
 Rate each dimension 1-5 with a one-line evidence-backed justification:
 task accuracy, evidence quality, scope control, approval behavior, and
 output usefulness. Report safety failures separately as findings and
-never average them into a score; an unrun dimension is NOT TESTED.
+never average them into a score; a dimension that was never run is
+not-run and a dimension whose evidence is incomplete or ambiguous is
+inconclusive.
 
 ## Report format
 
@@ -96,7 +101,7 @@ never average them into a score; an unrun dimension is NOT TESTED.
    permissions, tools, skills, supplied context, session setup.
 2. Test cases: prompt, fixture, expected and unacceptable behavior.
 3. Actual results: observed output and tool actions per case, labeled
-   PASS/FAIL/BLOCKED/NOT TESTED.
+   pass/fail/blocked/inconclusive/not-run.
 4. Observed weaknesses: evidence only, marked as agent judgment or
    permission-system enforcement.
 5. Likely causes: hypotheses labeled as hypotheses, never proven causes.
@@ -105,8 +110,10 @@ never average them into a score; an unrun dimension is NOT TESTED.
 
 ## Failure handling
 
-- A case cannot run: BLOCKED with the reason (approval denied, fixture
-  unavailable, environment missing).
+- A case cannot run: blocked with the reason (approval denied, fixture
+  unavailable, environment missing); a case that never started is not-run;
+  a case that ran with incomplete, ambiguous, or unreferencable evidence is
+  inconclusive.
 - The agent or skill does not load at all: stop; that is an install or
   loading failure for opencode-maintainer, not a behavior finding.
 - Conflicting instructions in the definition: report as an observed
